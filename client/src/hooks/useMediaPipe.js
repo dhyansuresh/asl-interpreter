@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { FilesetResolver, HandLandmarker, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js"
+import { FilesetResolver, HandLandmarker, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/vision_bundle.js"
 
 const useMediaPipe = (webcamRef, canvasRef) => {
     useEffect(() => {
         const initMediaPipe = async () => {
             const vision = await FilesetResolver.forVisionTasks(
-                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm"
             )
             const handLandmarker = await HandLandmarker.createFromOptions(vision, {
                 baseOptions: {
