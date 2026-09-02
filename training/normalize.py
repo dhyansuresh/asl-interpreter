@@ -22,7 +22,6 @@ clean = normalized_arr[~bad]
 clean_labels = data['labels'][~bad]
 
 
-
 print(np.unique(data['labels'][bad], return_counts=True))
 print(clean.shape, clean_labels.shape)
 print(np.isnan(clean).any())
