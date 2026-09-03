@@ -4,6 +4,8 @@ import json
 import torch
 from sklearn.model_selection import train_test_split
 from torch import nn
+from torch.utils.data import TensorDataset, DataLoader
+
 
 def prepare_data():
     data = np.load('data/landmarks_normalized.npz')
@@ -41,7 +43,18 @@ def train(X_train, X_test, y_train, y_test):
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
     out = model(X_train[:5])
-    print(out)
+
+    train_ds = TensorDataset(X_train, y_train)
+    train_loader = DataLoader(train_ds, batch_size=64, shuffle=True)
+
+    for epoch in range(20):
+        for batch_x, batch_y in train_loader:
+            optimizer.zero_grad()
+            output = model(batch_x)
+            loss = criterion(output, batch_y)
+            loss.item()
+            loss.backward()
+            optimizer.step()
 
 X_train, X_test, y_train, y_test, classes = prepare_data()
 train(X_train, X_test, y_train, y_test)
